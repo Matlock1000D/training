@@ -1,0 +1,4 @@
+C:\Users\bakusson\source\repos\DrawStuffForms\DrawStuffForms\obj\Debug\DrawStuffForms.csprojAssemblyReference.cache
+C:\Users\bakusson\source\repos\DrawStuffForms\DrawStuffForms\obj\Debug\DrawStuffForms.Properties.Resources.resources
+C:\Users\bakusson\source\repos\DrawStuffForms\DrawStuffForms\obj\Debug\DrawStuffForms.csproj.GenerateResource.cache
+C:\Users\bakusson\source\repos\DrawStuffForms\DrawStuffForms\obj\Debug\DrawStuffForms.csproj.CoreCompileInputs.cache

@@ -1,0 +1,7 @@
+C:\Users\bakusson\source\repos\Pelleily1\Pelleily1\bin\Debug\Pelleily1.exe.config
+C:\Users\bakusson\source\repos\Pelleily1\Pelleily1\bin\Debug\Pelleily1.exe
+C:\Users\bakusson\source\repos\Pelleily1\Pelleily1\bin\Debug\Pelleily1.pdb
+C:\Users\bakusson\source\repos\Pelleily1\Pelleily1\obj\Debug\Pelleily1.csproj.CoreCompileInputs.cache
+C:\Users\bakusson\source\repos\Pelleily1\Pelleily1\obj\Debug\Pelleily1.exe
+C:\Users\bakusson\source\repos\Pelleily1\Pelleily1\obj\Debug\Pelleily1.pdb
+C:\Users\bakusson\source\repos\Pelleily1\Pelleily1\obj\Debug\Pelleily1.csprojAssemblyReference.cache

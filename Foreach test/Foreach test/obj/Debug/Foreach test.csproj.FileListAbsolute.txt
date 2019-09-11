@@ -1,0 +1,7 @@
+C:\Users\bakusson\source\repos\Foreach test\Foreach test\obj\Debug\Foreach test.csprojAssemblyReference.cache
+C:\Users\bakusson\source\repos\Foreach test\Foreach test\obj\Debug\Foreach test.csproj.CoreCompileInputs.cache
+C:\Users\bakusson\source\repos\Foreach test\Foreach test\bin\Debug\Foreach test.exe.config
+C:\Users\bakusson\source\repos\Foreach test\Foreach test\bin\Debug\Foreach test.exe
+C:\Users\bakusson\source\repos\Foreach test\Foreach test\bin\Debug\Foreach test.pdb
+C:\Users\bakusson\source\repos\Foreach test\Foreach test\obj\Debug\Foreach test.exe
+C:\Users\bakusson\source\repos\Foreach test\Foreach test\obj\Debug\Foreach test.pdb

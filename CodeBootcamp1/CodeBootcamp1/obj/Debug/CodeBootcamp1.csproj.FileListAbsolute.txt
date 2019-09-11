@@ -1,0 +1,7 @@
+C:\Users\bakusson\source\repos\CodeBootcamp1\CodeBootcamp1\obj\Debug\CodeBootcamp1.csprojAssemblyReference.cache
+C:\Users\bakusson\source\repos\CodeBootcamp1\CodeBootcamp1\obj\Debug\CodeBootcamp1.csproj.CoreCompileInputs.cache
+C:\Users\bakusson\source\repos\CodeBootcamp1\CodeBootcamp1\bin\Debug\CodeBootcamp1.exe.config
+C:\Users\bakusson\source\repos\CodeBootcamp1\CodeBootcamp1\bin\Debug\CodeBootcamp1.exe
+C:\Users\bakusson\source\repos\CodeBootcamp1\CodeBootcamp1\bin\Debug\CodeBootcamp1.pdb
+C:\Users\bakusson\source\repos\CodeBootcamp1\CodeBootcamp1\obj\Debug\CodeBootcamp1.exe
+C:\Users\bakusson\source\repos\CodeBootcamp1\CodeBootcamp1\obj\Debug\CodeBootcamp1.pdb

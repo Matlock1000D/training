@@ -1,0 +1,7 @@
+C:\Users\bakusson\source\repos\SafkaOptimaattori\SafkaOptimaattori\obj\Debug\SafkaOptimaattori.csprojAssemblyReference.cache
+C:\Users\bakusson\source\repos\SafkaOptimaattori\SafkaOptimaattori\obj\Debug\SafkaOptimaattori.csproj.CoreCompileInputs.cache
+C:\Users\bakusson\source\repos\SafkaOptimaattori\SafkaOptimaattori\bin\Debug\SafkaOptimaattori.exe.config
+C:\Users\bakusson\source\repos\SafkaOptimaattori\SafkaOptimaattori\bin\Debug\SafkaOptimaattori.exe
+C:\Users\bakusson\source\repos\SafkaOptimaattori\SafkaOptimaattori\bin\Debug\SafkaOptimaattori.pdb
+C:\Users\bakusson\source\repos\SafkaOptimaattori\SafkaOptimaattori\obj\Debug\SafkaOptimaattori.exe
+C:\Users\bakusson\source\repos\SafkaOptimaattori\SafkaOptimaattori\obj\Debug\SafkaOptimaattori.pdb
