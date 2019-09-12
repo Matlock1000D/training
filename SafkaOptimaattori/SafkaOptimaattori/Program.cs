@@ -27,6 +27,15 @@ namespace SafkaOptimaattori
         static void GenerateRecipeList(int maxrecipes)          //reseptilistan generointi, maxrecipes reseptiä listataan
         {
             //tiukkaa SQL-koodia tänne
+			
+			//määritellään hakuehdot
+				//katsotaan Ruokavarasto-tietokannasta mikä menee ensimmäisenä vanhaksi
+				//haetaan resepteistä ko. ruoka-ainetta käyttävät
+				//jos tämä optio on valittu, heitetään pois reseptit joihin jäljellä oleva aine ei riitä. Soft-optiolla ne jätetään jäljelle, mutta rullataan listan loppuun
+				//järjestetetään sen mukaan, montaako muuta ruokalajia tarvitaan (tai hinta, tie breakerinä koska viimeksi on tehty)
+				//katsotaan, onko saatu *maxrecipes* reseptiä
+				//jos on => eteenpäin ELSE etsitään toisena vanhaksi menevä ja iteroidaan, kunnes on saatu *maxrecipes* reseptiä tai ruuat loppuvat
+				
             return;
         }
     }
