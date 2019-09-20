@@ -10,6 +10,13 @@ namespace Pelleily1
     {
         static void Main(string[] args)
         {
+            President president = new President();
+            president.Greet();
+            Mugabe mugabe = new Mugabe();
+            mugabe.Greet();
+            
+
+            /*
             string hepunnimi, syote;
             int a=0, b=0;
             bool inputokflag = false;
@@ -63,6 +70,7 @@ namespace Pelleily1
             Console.WriteLine(state.TellCapital());
 
             Console.ReadLine();
+            */
         }
     }
 
@@ -104,6 +112,22 @@ namespace Pelleily1
         ~State()
         {
             Console.WriteLine("Imhotep Maailmojentuhoaja saapuu!");
+        }
+    }
+    public class President
+    {
+        public virtual void Greet()
+        {
+            Console.WriteLine("Hei, olen joku presidentti.");
+        }
+    }
+
+    public class Mugabe : President
+    {
+        public override void Greet()
+        {
+            base.Greet();
+            Console.WriteLine("Hei, olen Robert Mugabe!");
         }
     }
 }
