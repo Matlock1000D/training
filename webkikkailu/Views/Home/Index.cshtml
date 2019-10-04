@@ -10,7 +10,13 @@
         </tr>
     </thead>    
     <tbody>
-        
+        @foreach (webkikkailu.Models.Customers customer in ViewBag.AllCustomers)
+        {
+        <tr>
+            <th>@customer.CompanyName</th>
+            <th>@customer.Country</th>
+        </tr>  
+        }
     </tbody>
 </table>
 </body>

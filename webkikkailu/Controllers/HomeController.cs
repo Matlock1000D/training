@@ -12,6 +12,11 @@ namespace webkikkailu.Controllers
     {
         public IActionResult Index()
         {
+            NorthwindContext northwindContext = new NorthwindContext();
+
+            List<Customers> customers = northwindContext.Customers.ToList();
+            ViewBag.AllCustomers = customers;
+
             return View();
         }
 
