@@ -1,16 +1,36 @@
 import React from 'react';
 
 class MyComponent extends React.Component {
-    render(){
 
-        var randomJunk = <p>Sekalaista pulinaa.</p>;
-        var luvut =[];
-        for (let i=1; i<=10; i++)
-        {
-            luvut.push(<p>{i}</p>);
+    constructor(props){
+        console.log("MyComponent.constructor()");
+
+        super(props);
+        this.state = {asiakkaat:[]};
+    }
+
+    componentDidMount(){
+        console.log("MyComponent.componentDidMount()");
+    }
+
+    render() {
+        console.log("MyComponent.render()");
+
+        var taulukko = [];
+        for (let i = 1; i <= 10; i++) {
+            taulukko.push(<table>
+                <thead><tr>
+                    <th>Pekka</th>
+                    <th>Pekkala {i}</th>
+                </tr></thead>
+                <tbody>
+                    
+                </tbody>
+                
+                </table>);
         }
 
-        return <div><h1>Ikioma komponentti! </h1> {randomJunk}{luvut}</div> ;
+        return <div>{ taulukko }</div>;
     }
 }
 
