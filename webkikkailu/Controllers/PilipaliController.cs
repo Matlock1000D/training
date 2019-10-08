@@ -13,16 +13,45 @@ namespace webkikkailu.Controllers
     [ApiController]
     public class PilipaliController : ControllerBase
     {
-        [Route("moi")]
-        public double SanoMoi()
+        [HttpGet]
+        [Route("")]
+        public List<Customers> ListAll()
         {
-            return 1.1;
+            NorthwindContext northwindContext = new NorthwindContext();
+            List<Customers> all = northwindContext.Customers.ToList();
+            return all;
         }
 
-        [Route("uliuli")]
-        public int Ulise()
+        [HttpGet]
+        [Route("{id}")]
+        public Customers ListOne(string id)
         {
-            return 1;
+            NorthwindContext northwindContext = new NorthwindContext();
+            Customers customer = (from c in northwindContext.Customers
+                                 where c.CustomerId == id
+                                 select c).FirstOrDefault();
+
+            //Customers asiakas2 = northwindContext.Customers.Find(id);
+
+            return customer;
+        }
+
+        [HttpPost]
+        [Route("")]
+        public bool AddNew(Customers newCustomer)
+        {
+            NorthwindContext northwindContext = new NorthwindContext();
+            northwindContext.Customers.Add(newCustomer);
+
+            northwindContext.SaveChanges();
+            return true;
+        }
+
+        [HttpDelete]
+        [Route("")]
+        public string RemoveCustomers()
+        {
+            return "Leikitään, että poistin kaikki asiakkaat!";
         }
     }
 }
