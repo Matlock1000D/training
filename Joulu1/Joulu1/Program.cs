@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Joulu1
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
@@ -21,47 +21,57 @@ namespace Joulu1
                 case "2":
                     Day2();
                     break;
+                case "3":
+                    Day3();
+                    break;
                 default:
                     Console.WriteLine("Anna kunnon päivä!");
                     break;
             }
         }
 
-        static void Day2()
+        static void Day3()
         {
-            string inputdata = File.ReadAllText(@"data\Joulu2.txt");
-            string[] intopStrings = inputdata.Split(',');
-            List<int> intopsList = new List<int>();
-            int commandpointer = 0;
-
-            foreach(string intopString in intopStrings)
-            {
-                intopsList.Add(Int32.Parse(intopString));
-            }
-            int[] intops = intopsList.ToArray();
-
-            while(intops[commandpointer] != 99)
-            {
-                switch (intops[commandpointer])
-                {
-                    case 1:
-                        intops[intops[commandpointer + 3]] = intops[intops[commandpointer + 1]] + intops[intops[commandpointer + 2]];
-                        break;
-                    case 2:
-                        intops[intops[commandpointer + 3]] = intops[intops[commandpointer + 1]] * intops[intops[commandpointer + 2]];
-                        break;
-                    default:
-                        Console.WriteLine("Määrittelemättömiä käskyjä syötteessä!");
-                        return;
-                        break;
-                }
-
-                commandpointer += 4;
-            }
-            Console.WriteLine(intops[0]);
+            
         }
 
-        static void Day1()
+        static void Day2()                      //intcode-ohjelma
+        {
+            int noun = 0, verb = 0;
+            int[] intops = initMemory();        //pitää tehdä tässä, että saadaan taulukolle koko
+            int result = 0;
+            bool stopflag = false;              //lippu, joka kertoo onko oikeat verbi ja substantiivi löydetty
+
+            //kakkostehtävän implementaatio
+            Console.WriteLine("Ajetaanko kakkostehtävä? Vastaa ”k” jos ajetaan.");
+            if (Console.ReadKey().Key == ConsoleKey.K)
+            {
+                for (noun = 0; noun < 100; noun++)
+                {
+                    for (verb = 0; verb < 100; verb++)
+                    {
+                        intops = initMemory();
+                        intops[1] = noun;                   //noun ja verb muistipaikkoihin 1 ja 2
+                        intops[2] = verb;
+                        //seuraavaksi siirrä koneen toimintalogiikka omaan aliohjelmaansa
+                        result = runComputer(intops);
+                        if (result == 19690720) stopflag = true;
+                        if (stopflag) break;
+                    }
+                    if (stopflag) break;
+                }
+                int answer = 100 * noun + verb;
+                Console.WriteLine("Löytyi noun " + noun + " ja verb " + verb + ", vastaus siis " + answer);
+                return;
+            }
+            else
+            {
+                result = runComputer(intops);
+                Console.WriteLine(intops[0]);
+            }
+        }
+
+            static void Day1()
         {
             string[] lines = File.ReadAllLines(@"data\Joulu1.txt");
             int totalfuel = 0;
