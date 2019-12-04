@@ -30,9 +30,15 @@ namespace Joulu1
             }
         }
 
-        static void Day3()
+        static void Day3()          //kolmospäivän ongelma, risteävät johdot
         {
-            
+            string[] inputdatas = File.ReadAllLines(@"data\Joulu3.txt");     //luetaan data muistiin
+            List<string[]> stringdiffsList = new List<string[]>();
+            foreach(string inputdata in inputdatas)
+            {
+                string[] stringdiffs = inputdata.Split(',');
+            }
+
         }
 
         static void Day2()                      //intcode-ohjelma
