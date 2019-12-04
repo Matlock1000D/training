@@ -7,6 +7,24 @@ namespace Joulu1
     {
         static void Main(string[] args)
         {
+            string dayString;
+            
+            Console.WriteLine("Valitse päivä");
+            dayString = Console.ReadLine();
+
+            switch (dayString)
+            {
+                case "1":
+                    Day1();
+                    break;
+                default:
+                    Console.WriteLine("Anna kunnon päivä");
+                    break;
+            }
+        }
+
+        static void Day1()
+        {
             string[] lines = File.ReadAllLines(@"data\Joulu1.txt");
             int totalfuel = 0;
 
