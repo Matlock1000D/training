@@ -37,8 +37,147 @@ namespace Joulu1
             foreach(string inputdata in inputdatas)
             {
                 string[] stringdiffs = inputdata.Split(',');
+                stringdiffsList.Add(stringdiffs);
+            }
+            //nyt listassa pitäisi olla kaksi oliota, joissa on taulukossa L21-tyylisiä komentoja
+            //muodostetaan seuraavaksi kartta tilanteesta kokonaislukutaulukkona
+
+            int minx=0, miny=0, maxx=0, maxy=0;         //tarvittavat maksimiarvot
+
+            foreach(string[] stringdiffs in stringdiffsList)    //katsotaan, miten iso taulukko tarvitaan
+            {
+                int x=0, y=0;                       //koordinaatit, aluksi 0,0
+                for (int i = 0; i<stringdiffs.Length;i++)       //käydään kaikki siirtokomennot läpi
+                {
+                    switch(stringdiffs[i].Substring(0, 1))
+                    {
+                        case "R":
+                            x += Int32.Parse(stringdiffs[i].Substring(1));
+                            if (x > maxx) maxx = x;
+                            break;
+                        case "L":
+                            x -= Int32.Parse(stringdiffs[i].Substring(1));
+                            if (x < minx) minx = x;
+                            break;
+                        case "U":
+                            y += Int32.Parse(stringdiffs[i].Substring(1));
+                            if (y > maxy) maxy = y;
+                            break;
+                        case "D":
+                            y -= Int32.Parse(stringdiffs[i].Substring(1));
+                            if (y < miny) miny = y;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            //taulukon koko on nyt tiedossa (maxx-minx+1, maxy-miny+1). Perustetaan se.
+            int[,] wiremap = new int[(maxx - minx + 1),(maxy - miny + 1)];
+
+            //kirjoitetaan taulukkoon, missä piuhat menevät. Origo jää nyt nollaksi, koska se on muutenkin tarkastelun ulkopuolella
+            int wireindex = 1;
+            foreach (string[] stringdiffs in stringdiffsList)
+            {
+                int x = -minx, y = -miny;                           //lähdetään liikkeelle origosta, joka on koordinaateissa -minx, -miny offsetin vuoksi
+                for (int i = 0; i < stringdiffs.Length; i++)       //käydään kaikki siirtokomennot läpi
+                {
+                    switch (stringdiffs[i].Substring(0, 1))
+                    {
+                        case "R":
+                            for (int j=0; j<Int32.Parse(stringdiffs[1].Substring(1)); j++)
+                            {
+                                x++;
+                                if (wiremap[x, y] < wireindex) wiremap[x, y] += wireindex;
+                            }
+                            break;
+                        case "L":
+                            for (int j = 0; j < Int32.Parse(stringdiffs[1].Substring(1)); j++)
+                            {
+                                x--;
+                                if (wiremap[x, y] < wireindex) wiremap[x, y] += wireindex;
+                            }
+                            break;
+                        case "U":
+                            for (int j = 0; j < Int32.Parse(stringdiffs[1].Substring(1)); j++)
+                            {
+                                y++;
+                                if (wiremap[x, y] < wireindex) wiremap[x, y] += wireindex;
+                            }
+                            break;
+                        case "D":
+                            for (int j = 0; j < Int32.Parse(stringdiffs[1].Substring(1)); j++)
+                            {
+                                y--;
+                                if (wiremap[x, y] < wireindex) wiremap[x, y] += wireindex;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                wireindex++;
             }
 
+            //etsitään lähin risteyskohta
+
+            int range = 0;
+
+            for (range = 1; range < maxx + maxy - minx - miny; range++)
+            {
+                int x = -minx, y = -miny;
+                y -= range;
+                for (int j = 0; j<range; j++)
+                {
+                    x--;
+                    y++;
+                    if (x>=0 && x <= maxx-minx && y >= 0 && y <= maxy - miny)
+                        if (wiremap[x,y] == 3)
+                        {
+                            Console.WriteLine(range);
+                            Console.ReadLine();
+                            return;
+                        }
+                }
+                for (int j = 0; j < range; j++)
+                {
+                    x++;
+                    y++;
+                    if (x >= 0 && x <= maxx - minx && y >= 0 && y <= maxy - miny)
+                        if (wiremap[x, y] == 3)
+                        {
+                            Console.WriteLine(range);
+                            Console.ReadLine();
+                            return;
+                        }
+                }
+                for (int j = 0; j < range; j++)
+                {
+                    x++;
+                    y--;
+                    if (x >= 0 && x <= maxx - minx && y >= 0 && y <= maxy - miny)
+                        if (wiremap[x, y] == 3)
+                        {
+                            Console.WriteLine(range);
+                            Console.ReadLine();
+                            return;
+                        }
+                }
+                for (int j = 0; j < range; j++)
+                {
+                    x--;
+                    y--;
+                    if (x >= 0 && x <= maxx - minx && y >= 0 && y <= maxy - miny)
+                        if (wiremap[x, y] == 3)
+                        {
+                            Console.WriteLine(range);
+                            Console.ReadLine();
+                            return;
+                        }
+                }
+                Console.WriteLine("Joku bugi!");
+                Console.ReadLine();
+            }
         }
 
         static void Day2()                      //intcode-ohjelma
