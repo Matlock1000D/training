@@ -19,13 +19,16 @@ namespace Joulu1
                     Day1();
                     break;
                 case "2":
-                    Day2();
+                    Day2(@"data\Joulu2.txt");
                     break;
                 case "3":
                     Day3();
                     break;
                 case "4":
                     Day4();
+                    break;
+                case "5":
+                    Day2(@"data\Joulu5.txt");
                     break;
                 default:
                     Console.WriteLine("Anna kunnon päivä!");
@@ -256,10 +259,10 @@ namespace Joulu1
 
         }
 
-        static void Day2()                      //intcode-ohjelma
+        static void Day2(string inputfile)                      //intcode-ohjelma
         {
             int noun = 0, verb = 0;
-            int[] intops = initMemory();        //pitää tehdä tässä, että saadaan taulukolle koko
+            int[] intops = initMemory(inputfile);        //pitää tehdä tässä, että saadaan taulukolle koko
             int result = 0;
             bool stopflag = false;              //lippu, joka kertoo onko oikeat verbi ja substantiivi löydetty
 
@@ -271,7 +274,7 @@ namespace Joulu1
                 {
                     for (verb = 0; verb < 100; verb++)
                     {
-                        intops = initMemory();
+                        intops = initMemory(inputfile);
                         intops[1] = noun;                   //noun ja verb muistipaikkoihin 1 ja 2
                         intops[2] = verb;
                         //seuraavaksi siirrä koneen toimintalogiikka omaan aliohjelmaansa

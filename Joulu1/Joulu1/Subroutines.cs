@@ -88,9 +88,9 @@ namespace Joulu1
             return intops[0];
         }
 
-        static int[] initMemory()
+        static int[] initMemory(string inputfile)
         {
-            string inputdata = File.ReadAllText(@"data\Joulu2.txt");
+            string inputdata = File.ReadAllText(inputfile);
             string[] intopStrings = inputdata.Split(',');
             List<int> intopsList = new List<int>();
             
