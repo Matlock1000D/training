@@ -121,6 +121,31 @@ namespace Joulu1
 
             //etsitään lähin risteyskohta
 
+            //tehtävän kakkosvaihe
+            Console.WriteLine("Suoritetaanko kakkostehtävä (k/e)?");
+
+            int steps=0, minsteps=-1;
+
+            if (Console.ReadKey().Key == ConsoleKey.K)
+            {
+                for (int j = 0; j < maxy - miny; j++)
+                {
+                    for (int i = 0; i < maxx - minx; i++)
+                    {
+                        if (wiremap[i, j] == 3)
+                        {
+                            steps = stepGetter(wiremap, minx, miny, i, j, stringdiffsList);
+                            if (minsteps == -1) minsteps = steps;
+                            else if (steps < minsteps) minsteps = steps;                    //verrataan, ovatko askeleet risteyskohtaan lyhimmät mahdolliset
+                            Console.WriteLine("Hei hulinaa! " + i + "," + j + "," + minsteps);
+                        }
+                    }
+                }
+                Console.WriteLine(minsteps);
+                Console.ReadLine();
+                return;
+            }
+
             int range = 0;
 
             for (range = 1; range < maxx + maxy - minx - miny; range++)
@@ -178,6 +203,8 @@ namespace Joulu1
             }
             Console.WriteLine("Joku bugi!");
             Console.ReadLine();
+
+
         }
 
         static void Day2()                      //intcode-ohjelma

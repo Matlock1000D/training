@@ -7,6 +7,61 @@ namespace Joulu1
 {
     partial class Program
     {
+        static int stepGetter(int[,] wiremap, int minx, int miny, int goalx, int goaly, List<string[]> stringdiffsList)     //laskee piuhojen stepit niin, että orgio on -minx, -miny:ssä, tarkastelupiste goalx,goaly:ssä 
+        {
+            //VARO, EI MITÄÄN VIRHEENTARKISTUSTA!
+
+            int steps = 0;  //montako askelta on otettu?
+
+            foreach (string[] stringdiffs in stringdiffsList)    //katsotaan, miten iso taulukko tarvitaan
+            {
+                int x = -minx, y = -miny;
+                for (int i = 0; i < stringdiffs.Length; i++)       //käydään kaikki siirtokomennot läpi
+                {
+                    switch (stringdiffs[i].Substring(0, 1))
+                    {
+                        case "R":
+                            for (int j = 0; j < Int32.Parse(stringdiffs[i].Substring(1)); j++)
+                            {
+                                x++;
+                                steps++;
+                                if (x == goalx && y == goaly) break;
+                            }
+                            break;
+                        case "L":
+                            for (int j = 0; j < Int32.Parse(stringdiffs[i].Substring(1)); j++)
+                            {
+                                x--;
+                                steps++;
+                                if (x == goalx && y == goaly) break;
+                            }
+                            break;
+                        case "U":
+                            for (int j = 0; j < Int32.Parse(stringdiffs[i].Substring(1)); j++)
+                            {
+                                y++;
+                                steps++;
+                                if (x == goalx && y == goaly) break;
+                            }
+                            break;
+                        case "D":
+                            for (int j = 0; j < Int32.Parse(stringdiffs[i].Substring(1)); j++)
+                            {
+                                y--;
+                                steps++;
+                                if (x == goalx && y == goaly) break;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    if (x == goalx && y == goaly) break;
+                }
+
+            }
+
+                return steps;
+        }
         static int runComputer(int[] intops)
         {
             int commandpointer = 0;
