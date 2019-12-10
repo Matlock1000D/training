@@ -77,7 +77,7 @@ namespace Joulu1
 
             //kirjoitetaan taulukkoon, missä piuhat menevät. Origo jää nyt nollaksi, koska se on muutenkin tarkastelun ulkopuolella
             int wireindex = 1;
-            foreach (string[] stringdiffs in stringdiffsList)
+            foreach (string[] stringdiffs in stringdiffsList)       //käydään kaikki eli siis kumpikin stringdiffs läpi
             {
                 int x = -minx, y = -miny;                           //lähdetään liikkeelle origosta, joka on koordinaateissa -minx, -miny offsetin vuoksi
                 for (int i = 0; i < stringdiffs.Length; i++)       //käydään kaikki siirtokomennot läpi
@@ -85,28 +85,28 @@ namespace Joulu1
                     switch (stringdiffs[i].Substring(0, 1))
                     {
                         case "R":
-                            for (int j=0; j<Int32.Parse(stringdiffs[1].Substring(1)); j++)
+                            for (int j=0; j<Int32.Parse(stringdiffs[i].Substring(1)); j++)
                             {
                                 x++;
                                 if (wiremap[x, y] < wireindex) wiremap[x, y] += wireindex;
                             }
                             break;
                         case "L":
-                            for (int j = 0; j < Int32.Parse(stringdiffs[1].Substring(1)); j++)
+                            for (int j = 0; j < Int32.Parse(stringdiffs[i].Substring(1)); j++)
                             {
                                 x--;
                                 if (wiremap[x, y] < wireindex) wiremap[x, y] += wireindex;
                             }
                             break;
                         case "U":
-                            for (int j = 0; j < Int32.Parse(stringdiffs[1].Substring(1)); j++)
+                            for (int j = 0; j < Int32.Parse(stringdiffs[i].Substring(1)); j++)
                             {
                                 y++;
                                 if (wiremap[x, y] < wireindex) wiremap[x, y] += wireindex;
                             }
                             break;
                         case "D":
-                            for (int j = 0; j < Int32.Parse(stringdiffs[1].Substring(1)); j++)
+                            for (int j = 0; j < Int32.Parse(stringdiffs[i].Substring(1)); j++)
                             {
                                 y--;
                                 if (wiremap[x, y] < wireindex) wiremap[x, y] += wireindex;
@@ -175,9 +175,9 @@ namespace Joulu1
                             return;
                         }
                 }
-                Console.WriteLine("Joku bugi!");
-                Console.ReadLine();
             }
+            Console.WriteLine("Joku bugi!");
+            Console.ReadLine();
         }
 
         static void Day2()                      //intcode-ohjelma
