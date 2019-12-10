@@ -34,12 +34,13 @@ namespace Joulu1
             return;
         }
 
-        static void Day4()
+        static void Day4()                                  //nyt kakkostehtävän lisäehdolla, lisäehdoton versio pitää kaivaa gitistä
         {
             int minpass = 278384, maxpass = 824795;         //koodattu olettamalla, että kaikki tutkittavat luvut ovat kuusinumeroisia. Vaatii lisäyksiä, jos tähän ei voi luottaa.
             int[] passdigits = new int[6];
             bool okflag = false;                            //onko salasana kelvollinen
             int acceptablePws = 0;                          //hyväksyttävien salasanojen määrä
+            int repnum = 0;                                //luku, jonka toistuvuutta tarkastellaan
 
             for (int password = minpass; password<=maxpass; password++)
             {
@@ -53,17 +54,27 @@ namespace Joulu1
                 }
 
                 //sitten vertaillaan
+                repnum = 0;
 
-                for (int i=5;i>0;i--)
+                for (int i = 5; i > 0; i--)
                 {
-                    if (passdigits[i] > passdigits[i-1])
+                    if (passdigits[i] == passdigits[i - 1] ) repnum++;
+                    else
+                    {
+                        if (repnum == 1) okflag = true;
+                        repnum = 0;
+                    }
+                }
+                if (repnum == 1) okflag = true;
+                for (int i = 5; i > 0; i--)
+                {
+                    if (passdigits[i] > passdigits[i - 1])
                     {
                         okflag = false;
                         break;
                     }
-                    if (passdigits[i] == passdigits[i - 1]) okflag = true;
                 }
-                if (okflag) acceptablePws++;
+            if (okflag) acceptablePws++;
             }
             Console.WriteLine(acceptablePws);
         }
