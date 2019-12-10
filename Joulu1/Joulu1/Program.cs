@@ -24,10 +24,48 @@ namespace Joulu1
                 case "3":
                     Day3();
                     break;
+                case "4":
+                    Day4();
+                    break;
                 default:
                     Console.WriteLine("Anna kunnon päivä!");
                     break;
             }
+            return;
+        }
+
+        static void Day4()
+        {
+            int minpass = 278384, maxpass = 824795;         //koodattu olettamalla, että kaikki tutkittavat luvut ovat kuusinumeroisia. Vaatii lisäyksiä, jos tähän ei voi luottaa.
+            int[] passdigits = new int[6];
+            bool okflag = false;                            //onko salasana kelvollinen
+            int acceptablePws = 0;                          //hyväksyttävien salasanojen määrä
+
+            for (int password = minpass; password<=maxpass; password++)
+            {
+                okflag = false;
+                int tempPass = password;
+                for (int i=0;i<6;i++)                   //salakala taulukkoon, jossa luvut ovat erillisinä. Merkitsevin luku tulee suurimmalle indeksille.
+                {
+                    
+                    passdigits[i] = tempPass % 10;
+                    tempPass /= 10;
+                }
+
+                //sitten vertaillaan
+
+                for (int i=5;i>0;i--)
+                {
+                    if (passdigits[i] > passdigits[i-1])
+                    {
+                        okflag = false;
+                        break;
+                    }
+                    if (passdigits[i] == passdigits[i - 1]) okflag = true;
+                }
+                if (okflag) acceptablePws++;
+            }
+            Console.WriteLine(acceptablePws);
         }
 
         static void Day3()          //kolmospäivän ongelma, risteävät johdot
