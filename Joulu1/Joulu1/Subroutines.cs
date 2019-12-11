@@ -60,29 +60,86 @@ namespace Joulu1
 
             }
 
-                return steps;
+            return steps;
+        }
+        static void intcodeOutput(int outputvalue)
+        {
+            Console.WriteLine(outputvalue);
+
+            return;
+        }
+        static int getInput()                       //kokonaislukusyöte konsolilta. EI MITÄÄN VIRHEENTARKASTUSTA!
+        {
+            int input;
+
+            Console.WriteLine("Annapa ID-numero kokonaislukuna");
+            input = Int32.Parse(Console.ReadLine());
+
+            return input;
+        }
+
+        
+
+        static int[] getParas(int[] intops, int commandpointer)
+        {
+            Dictionary<int,int> opcodeParas = OpcodeParas.initOpcodes();
+            int command = intops[commandpointer] % 100;
+            int paranumber = opcodeParas[command];
+            int[] paras = new int[paranumber];
+            int mode;                                       //tarkastellun parametrin moodi
+
+            int rawModes = intops[commandpointer] / 100;
+
+            for (int i=0;i<paranumber;i++)                  //iteroidaan moodit taulukkoon
+            {
+                mode = rawModes % 10;
+                switch (mode)
+                {
+                    case 0:                                     //paikkatila
+                        paras[i] = intops[intops[commandpointer + 1 + i]];
+                        break;
+                    case 1:                                     //välitön tila
+                        paras[i] = intops[commandpointer + 1 + i];
+                        break;
+                    default:                                    //oletuksena käytetään samaa käyttäytymistä kuin paikkatilassa
+                        paras[i] = intops[intops[commandpointer + 1 + i]];
+                        break;
+                }
+                rawModes /= 10;                             //siirrytään seuraavaan lukuun
+            }
+
+            return paras;
         }
         static int runComputer(int[] intops)
         {
             int commandpointer = 0;
+            Dictionary<int, int> opcodeParas = OpcodeParas.initOpcodes();
+            int command = intops[commandpointer] % 100;
 
-            while (intops[commandpointer] != 99)
+            while (command != 99)
             {
-                switch (intops[commandpointer])
+                int[] paras = getParas(intops, commandpointer);
+                switch (command)
                 {
-                    case 1:
-                        intops[intops[commandpointer + 3]] = intops[intops[commandpointer + 1]] + intops[intops[commandpointer + 2]];
+                    case 1:                                                         //yhteenlasku
+                        intops[intops[commandpointer + 3]] = paras[0] + paras[1];
                         break;
-                    case 2:
-                        intops[intops[commandpointer + 3]] = intops[intops[commandpointer + 1]] * intops[intops[commandpointer + 2]];
+                    case 2:                                                         //kertolasku
+                        intops[intops[commandpointer + 3]] = paras[0] * paras[1];
                         break;
-                    default:
-                        Console.WriteLine("Määrittelemättömiä käskyjä syötteessä!");
+                    case 3:                                                         //syötteen vastaanotto
+                        intops[intops[commandpointer + 1]] = getInput();
+                        break;
+                    case 4:                                                         //tulosteen anto
+                        intcodeOutput(intops[intops[commandpointer + 1]]);
+                        break;
+                    default:                                                        //virheilmo, jos tulee vastaan tuntematon komentokoodi
+                        Console.WriteLine("Määrittelemättömiä käskyjä komennoissa!");
                         return -1;
                         break;
                 }
-
-                commandpointer += 4;
+                commandpointer += opcodeParas[command] + 1;          //lisätään komento-osoitinta 1 + ko. komennon parametrien määrä
+                command = intops[commandpointer] % 100;                              //luetaan uusi komento
             }
 
             return intops[0];

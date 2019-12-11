@@ -267,7 +267,7 @@ namespace Joulu1
             bool stopflag = false;              //lippu, joka kertoo onko oikeat verbi ja substantiivi löydetty
 
             //kakkostehtävän implementaatio
-            Console.WriteLine("Ajetaanko kakkostehtävä? Vastaa ”k” jos ajetaan.");
+            Console.WriteLine("Ajetaanko päivän 2 kakkostehtävä? Vastaa ”k” jos ajetaan.");
             if (Console.ReadKey().Key == ConsoleKey.K)
             {
                 for (noun = 0; noun < 100; noun++)
@@ -291,7 +291,7 @@ namespace Joulu1
             else
             {
                 result = runComputer(intops);
-                Console.WriteLine(intops[0]);
+                //Console.WriteLine(intops[0]);
             }
         }
 
