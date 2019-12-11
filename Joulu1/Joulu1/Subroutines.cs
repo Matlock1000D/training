@@ -115,6 +115,7 @@ namespace Joulu1
             int commandpointer = 0;
             Dictionary<int, int> opcodeParas = OpcodeParas.initOpcodes();
             int command = intops[commandpointer] % 100;
+            bool jumpflag = false;      //lippu joka kertoo, onko komento-osoitinta siirretty
 
             while (command != 99)
             {
@@ -133,12 +134,35 @@ namespace Joulu1
                     case 4:                                                         //tulosteen anto
                         intcodeOutput(intops[intops[commandpointer + 1]]);
                         break;
+                    case 5:                                                         //hyppää jos tosi
+                        if (paras[0] != 0)
+                        {
+                            commandpointer = paras[1];
+                            jumpflag = true;
+                        }
+                        break;
+                    case 6:                                                         //hyppää jos epätosi
+                        if (paras[0] == 0)
+                        {
+                            commandpointer = paras[1];
+                            jumpflag = true;
+                        }
+                        break;
+                    case 7:                                                         //pienempi kuin
+                        if (paras[0] < paras[1]) intops[intops[commandpointer + 3]] = 1;
+                        else intops[intops[commandpointer + 3]] = 0;
+                        break;
+                    case 8:                                                         //yhtä suuri
+                        if (paras[0] == paras[1]) intops[intops[commandpointer + 3]] = 1;
+                        else intops[intops[commandpointer + 3]] = 0;
+                        break;
                     default:                                                        //virheilmo, jos tulee vastaan tuntematon komentokoodi
                         Console.WriteLine("Määrittelemättömiä käskyjä komennoissa!");
                         return -1;
                         break;
                 }
-                commandpointer += opcodeParas[command] + 1;          //lisätään komento-osoitinta 1 + ko. komennon parametrien määrä
+                if (!jumpflag) commandpointer += opcodeParas[command] + 1;          //lisätään komento-osoitinta 1 + ko. komennon parametrien määrä, jos jumpflag on epätosi eli osoitinta ei ole siirretty aiemmin
+                jumpflag = false;
                 command = intops[commandpointer] % 100;                              //luetaan uusi komento
             }
 
