@@ -1,5 +1,11 @@
 
 #Testikoodia pyyttonilla kikkailuun
 
-if 5 > 2:
-    print("Mitä äijä?")
+thisdict = {
+    "merkki": "Lada",
+    "malli": "1200S",
+    "vuosi": 1985
+    }
+
+for x,y in thisdict.items():
+    print(x,y)
